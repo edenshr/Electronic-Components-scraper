@@ -25,9 +25,7 @@ class IcsScraper:
     USERNAME = "ecrele1"
     PASSWORD = "ginger2016"
     MOCK_PRODUCT_ID = "r"
-    LIST_OF_PRODUCTS = ["ESDA6V1LY"]
-    #LIST_OF_PRODUCTS = ["QGE7320MC", "AD9830ASTZREEL", "AD9951YSVREEL7", "AD9913BCPZREEL7", "AD5934YRSZREEL7",
-    #                    "AD9851BRSRL", "AD9838BCPZRL", "AD9837BCPZRL", "FST16090", "UFT20120"]
+    LIST_OF_PRODUCTS = [] # This list contain the desired component from Digikey scraper
     CHROME_DRIVE_PATH = '/Users/hadarisraeli1/Desktop/Hadar/icsScraper/chromedriver'
     URL = "https://www.icsource.com/Home/index.aspx"
     TIME_TO_WAIT = 60
@@ -110,12 +108,7 @@ class IcsScraper:
             f"&part={product_id}"
         )
         time.sleep(1.5)
-        # self.driver.find_element_by_xpath(
-        #     '/html/body/form/div[4]/table/tbody/tr[1]/td/table/tbody/tr/td[2]/div/table/tbody/tr/td[2]/a').click()
-        # self.driver.find_element_by_xpath(
-        #     '/html/body/form/div[1]/div/div/ul/li[6]').click()
-        # time.sleep(3)
-
+        
     def get_rate(self, product_id: str) -> int:
         self.get_graph(product_id=product_id)
         df = self.get_graph_dataframe()
@@ -165,7 +158,7 @@ class IcsScraper:
         """
         page_search_values = self.parse_page_source()
         page_values = self.parse_page_str_to_values(page_search_values)
-        # a = [safe_parse(row) for row in page_search_values if safe_parse(row)]
+       
         return pd.DataFrame(page_values, columns=['Part', 'Date', 'Searches'])
 
 
@@ -196,39 +189,7 @@ class IcsScraper:
             print()
 
         return df
-
-    # def get_product_quantities(self, product_id: str) -> pd.DataFrame:
-    #
-    #     df = pd.DataFrame()
-    #     score = self.get_rate(product_id)
-    #     if score > 0.5:
-    #         self.search_product(product_id)
-    #         self.driver.find_element_by_css_selector("input#divBTNStock").click()
-    #         time.sleep(2.0)
-    #
-    #         num_rows = len(self.driver.find_elements_by_xpath("//*[@id='searchResults']/tbody/tr"))
-    #
-    #         df['Quantities'] = [self.get_quantity(index=i) for i in np.arange(self.TABLE_START_IND, num_rows + 1)
-    #                             if self.get_quantity(index=i)]
-    #         df['MFGs'] = [self.get_mfg(index=i) for i in np.arange(self.TABLE_START_IND, num_rows + 1)
-    #                       if self.get_mfg(index=i)]
-    #         df['Companies'] = [self.get_company(index=i) for i in np.arange(self.TABLE_START_IND, num_rows + 1)
-    #                            if self.get_company(index=i)]
-    #         df['Countries'] = [self.get_country(index=i) for i in np.arange(self.TABLE_START_IND, num_rows + 1)
-    #                            if self.get_country(index=i)]
-    #         if not df.empty:
-    #
-    #             df['Rating'] = score
-    #             if score > 1:
-    #                 print(f" ,score: {score}")
-    #             else:
-    #                 print()
-    #         else:
-    #             print()
-    #     else:
-    #         print()
-    #     return df
-
+    
     @classmethod
     def get_products_quantities(cls, products_id: List) -> pd.DataFrame:
         """
@@ -249,15 +210,6 @@ class IcsScraper:
                 list_of_dataframes.append(df)
                 IcsScraper.add_new_line_to_exist_csv(df, "/Users/hadarisraeli1/Downloads/test1.csv")
             time.sleep(1.5)
-
-
-
-        # product_id_to_drop = []
-        # for i in range(len(list_of_dataframes)):
-        #     if len(list_of_dataframes[i]) >= 1:
-        #         list_of_dataframes[i].loc[:, "Product ID"] = products_id[i]
-        #     else:
-        #         product_id_to_drop.append(products_id[i])
 
         inventory_df = pd.concat(list_of_dataframes)
         return inventory_df
@@ -304,18 +256,6 @@ class IcsScraper:
 
             # Close the file object
             f_object.close()
-
-
-
-if __name__ == '__main__':
-    stop = "SMA6J10A-TR"
-
-    dataframe2 = pd.read_csv("/Users/hadarisraeli1/Downloads/digikey_data.csv")
-    list_of_products = list(dataframe2[dataframe2['Supplier'] == 'STMicroelectronics']['Product_Model'].unique())
-    index = list_of_products.index("L78L08ACD")
-    list_of_products = list_of_products[index:]
-    ics = IcsScraper.get_products_quantities(list_of_products)
-    ics.to_csv("/Users/hadarisraeli1/Downloads/STMicroelectronics.csv")
 
 
 
