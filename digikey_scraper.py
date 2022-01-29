@@ -177,25 +177,7 @@ class DigikeyScraper:
 
         for row in data_to_write.values():
             digikey_data_collection.insert_one(self.row_to_write_helper(row))
-
-        # outfile_name = datetime.now().strftime("%d-%m-%Y %H_%M_%S") + " digikey.csv"
-        # outfile = open(outfile_name, 'w', newline='', encoding='utf-8')
-        # writer = csv.writer(outfile, delimiter=",", quoting=csv.QUOTE_MINIMAL)
-        # ccc = writer.writerow(HEADERS)
-        #
-        # for product_to_write in data_to_write:
-        #     row_to_write = []
-        #     for header_item in HEADERS:
-        #         if header_item in data_to_write[product_to_write]:
-        #             row_to_write.append(data_to_write[product_to_write][header_item])
-        #         else:
-        #             row_to_write.append("")
-        #
-        #     ccc = writer.writerow(row_to_write)
-        #
-        # outfile.close()
-        # print("Created output file:", outfile_name)
-
+            
         self.driver.quit()
         return
 
@@ -365,33 +347,3 @@ def write_all_data():
     for manufacturer in manufacturers:
         scraper = DigikeyScraper(INPUT_BROWSER_PATH, manufacturer['url'])
         scraper.scrape_and_write_data()
-
-
-if __name__ == '__main__':
-    get_data_by_mfg("NVIDIA")
-    x = 3
-# keys = list(multiple_dictionary.keys())
-# for key in keys:
-#     for i in range(len(multiple_dictionary[key])):
-#         INPUT_START_URL = multiple_dictionary[key][i]
-#         if __name__ == '__main__':
-#             scraper = DigikeyScraper(INPUT_BROWSER_PATH, INPUT_START_URL)
-#             scraper.scrape_and_write_data()
-#
-#
-# list_of_directories = glob.glob("/Users/edenshrian/Desktop/Documents/Eden Shrian/Eden/Projects/SemiConnductors/*.csv")
-# dates = []
-# for i in range(len(list_of_directories)):
-#     s = list_of_directories[i]
-#     start = s.find("SemiConnductors/") + len("SemiConnductors/")
-#     end = s.find(".csv")
-#     substring = s[start:end]
-#     dates.append(substring)
-#
-# list_of_dataframes = []
-# for i in range(len(dates)):
-#     if dates[i][:10] == datetime.now().strftime("%d-%m-%Y"):
-#         df = pd.read_csv(list_of_directories[i])
-#         list_of_dataframes.append(df)
-#
-# dataframe = pd.concat(list_of_dataframes)
