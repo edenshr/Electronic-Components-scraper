@@ -118,14 +118,6 @@ def extract_urls():
     finally:
         driver.close()
 
-    # manufacturers = [item for sublist in manufacturers for item in sublist]
-    # manufacturers[0] = manufacturers[0][1:]
-    # zip_iterator_multiple = zip(manufacturers, multiple)
-    # multiple_dictionary = dict(zip_iterator_multiple)
-    # zip_iterator_one = zip(manufacturers, one)
-    # one_dictionary = dict(zip_iterator_one)
-    # driver.close()
-
 
 def add_new_manufacturer(new_manufacturer: str):
     manufacturer = manufacturers_collection.find_one({"manufacturer": new_manufacturer})
@@ -149,16 +141,5 @@ def find_manufacturer_top_products(manufacturer: str):
 
 def find_manufacturers_top_products():
     extract_urls()
-
-
-if __name__ == '__main__':
-    extract_urls()
-    # for manufacturer_data in manufacturers_collection.find():
-    #     intel = products_collection.find({"manufacturer": manufacturer_data['manufacturer']})
-    #     count = 0
-    #     print(f"***************{manufacturer_data['manufacturer']}****************")
-    #     for pro in intel:
-    #         print(f"{count}: {pro['name']}")
-    #         count += 1
 
 
