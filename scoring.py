@@ -21,8 +21,3 @@ def scoring(product_df: pd.DataFrame) -> int:
         filtered_last_n_month['EwM'] = filtered_last_n_month["Searches"].ewm(span=30, adjust=False).mean()
         scoring = float(filtered_last_n_month['EwM'].iloc[-1])
     return scoring
-
-if __name__ == '__main__':
-    df = pd.read_csv("/Users/hadarisraeli1/Desktop/test.csv")
-    scoring(df)
-
