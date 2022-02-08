@@ -27,11 +27,10 @@ import pymongo
 import ssl
 
 
-INPUT_BROWSER_PATH = '/Users/hadarisraeli1/Desktop/Hadar/icsScraper/chromedriver'
-#INPUT_BROWSER_PATH = "/Users/edenshrian/Desktop/Documents/Eden Shrian/Eden/Chrome Driver/chromedriver"
+INPUT_BROWSER_PATH = ''
 
 MONGO_DETAILS = \
-    "mongodb+srv://ics-Scraper:ginger2016@cluster0.2woo5.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+    ""
 client = pymongo.MongoClient(MONGO_DETAILS, ssl_cert_reqs=ssl.CERT_NONE)
 database = client.ics_scraper
 # manufacturers_collection = database.get_collection('manufacturers')
