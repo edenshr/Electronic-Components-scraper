@@ -17,7 +17,7 @@ chrome_options.add_experimental_option("excludeSwitches", ["enable-automation"])
 chrome_options.add_experimental_option('useAutomationExtension', False)
 chrome_options.add_argument('--disable-popup-blocking')
 driver = webdriver.Chrome(
-    executable_path='/Users/hadarisraeli1/Desktop/Hadar/icsScraper/chromedriver',
+    executable_path='',
     options=chrome_options)
 driver.maximize_window()
 
@@ -29,7 +29,7 @@ SEARCH_BUTTON_PATCH = '//*[@class="header__search"]//button'
 TIME_TO_WAIT = 60
 
 MONGO_DETAILS = \
-    "mongodb+srv://ics-Scraper:ginger2016@cluster0.2woo5.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+    ""
 client = pymongo.MongoClient(MONGO_DETAILS, ssl_cert_reqs=ssl.CERT_NONE)
 database = client.ics_scraper
 manufacturers_collection = database.get_collection('manufacturers')
