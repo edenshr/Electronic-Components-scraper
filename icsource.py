@@ -22,8 +22,8 @@ class Duration(Enum):
 
 
 class IcsScraper:
-    USERNAME = "ecrele1"
-    PASSWORD = "ginger2016"
+    USERNAME = "" ## Add User name
+    PASSWORD = "" ## Add password
     MOCK_PRODUCT_ID = "r"
     LIST_OF_PRODUCTS = [] # This list contain the desired component from Digikey scraper
     CHROME_DRIVE_PATH = '/Users/hadarisraeli1/Desktop/Hadar/icsScraper/chromedriver'
